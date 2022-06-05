@@ -16,10 +16,8 @@ public class MessageService {
     }
 
     public String greetingMessage(
-            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Map<String, Object> model
     ) {
-        model.put("name", name);
         return "greeting";
     }
 

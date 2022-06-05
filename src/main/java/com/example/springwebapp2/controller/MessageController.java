@@ -16,20 +16,19 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @GetMapping("/greeting")
+    @GetMapping
     public String greeting(
-            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Map<String, Object> model
     ) {
-        return messageService.greetingMessage(name, model);
+        return messageService.greetingMessage(model);
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Map<String, Object> model) {
         return messageService.mainPage(model);
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(
             @RequestParam String text,
             @RequestParam(name = "tag", required = false, defaultValue = "new") String tag,
