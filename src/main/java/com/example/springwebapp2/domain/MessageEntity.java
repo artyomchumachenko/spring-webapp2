@@ -6,18 +6,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Message {
+public class MessageEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String text;
     private String tag;
 
-    public Message() {
+    public MessageEntity() {
     }
 
-    public Message(String text, String tag) {
+    public MessageEntity(String text, String tag) {
         this.text = text;
         this.tag = tag;
     }
