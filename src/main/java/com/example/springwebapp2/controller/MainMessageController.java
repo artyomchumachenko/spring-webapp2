@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class MessageController {
+public class MainMessageController {
     private final MessageService messageService;
 
-    public MessageController(MessageService messageService) {
+    public MainMessageController(MessageService messageService) {
         this.messageService = messageService;
     }
 
