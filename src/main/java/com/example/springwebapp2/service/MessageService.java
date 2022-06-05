@@ -1,7 +1,9 @@
 package com.example.springwebapp2.service;
 
 import com.example.springwebapp2.domain.MessageEntity;
+import com.example.springwebapp2.domain.UserEntity;
 import com.example.springwebapp2.repos.MessageRepo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,11 +32,12 @@ public class MessageService {
     }
 
     public String addMessage(
+            @AuthenticationPrincipal UserEntity user,
             @RequestParam String text,
             @RequestParam String tag,
             Map<String, Object> model
     ) {
-        MessageEntity message = new MessageEntity(text, tag);
+        MessageEntity message = new MessageEntity(text, tag, user);
         messagesRepo.save(message);
         addAllMessagesToModel(model);
         return "main";

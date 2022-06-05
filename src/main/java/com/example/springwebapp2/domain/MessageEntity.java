@@ -1,9 +1,14 @@
 package com.example.springwebapp2.domain;
 
+import org.apache.catalina.User;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class MessageEntity {
@@ -14,12 +19,21 @@ public class MessageEntity {
     private String text;
     private String tag;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private UserEntity author;
+
     public MessageEntity() {
     }
 
-    public MessageEntity(String text, String tag) {
+    public MessageEntity(String text, String tag, UserEntity user) {
+        this.author = user;
         this.text = text;
         this.tag = tag;
+    }
+
+    public String getAuthorName() {
+        return author != null ? author.getUsername() : "<none>";
     }
 
     public Integer getId() {
@@ -44,5 +58,13 @@ public class MessageEntity {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public UserEntity getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(UserEntity author) {
+        this.author = author;
     }
 }
